@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="wdweApp">
 <head>
 	{% load staticfiles %}
 	<meta charset="UTF-8">
@@ -10,11 +10,24 @@
 </head>
 
 <body>
+
 	{% block main %}
 
 	{%  endblock %}
 
+	<script src="{% static "jquery/dist/jquery.min.js" %}"></script>
 
+	<script src="{% static "angular/angular.js" %}"></script>
+	<script src="{% static "angular-resource/angular-resource.min.js" %}"></script>
+	<script src="{% static "angular-cookies/angular-cookies.min.js" %}"></script>
+
+	<script src="{% static "angular-route/angular-route.min.js" %}"></script>
+	<script src="{% static "angular-ui-router/release/angular-ui-router.min.js" %}"></script>
+
+	<script src="{% static "js/wdweApp.js" %}"></script>
+	<script src="{% static "js/wdweCtrl.js" %}"></script>
+	<script src="{% static "js/wdweDirectives.js" %}"></script>
+	<script src="{% static "js/wdweServices.js" %}"></script>
 
 </body>
 </html>

@@ -133,11 +133,15 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
     'social.backends.twitter.TwitterOAuth',
     'social.backends.instagram.InstagramOAuth2',
-
     'django.contrib.auth.backends.ModelBackend',
 )
 
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_INSTAGRAM_KEY    = 'b81edb486a994bd3a5ab2d3ae811d962'
+SOCIAL_AUTH_INSTAGRAM_SECRET = 'cd93ca4495004189b26c0b888fa564b9'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
