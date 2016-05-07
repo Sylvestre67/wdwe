@@ -2,9 +2,9 @@ angular.module('wdweApp', [
 	'ui.router',
 	'ngResource',
 	'ngCookies',
-	'wdweApp.controllers'
-    //'tweeterApp.services',
-    //'tweeterApp.controllers'
+	'wdweApp.controllers',
+	'wdweApp.services',
+	'doowb.angular-pusher'
 ])
 	.config(function ($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $urlRouterProvider) {
 
@@ -45,5 +45,11 @@ angular.module('wdweApp', [
 			controller: 'UserCtrl',
 		  })*/
 
-});
-
+})
+	.config(['PusherServiceProvider',
+		function(PusherServiceProvider) {
+			PusherServiceProvider
+				.setToken('141eb0d4f2f16a645679')
+				.setOptions({});
+		}
+	]);
