@@ -9,7 +9,7 @@ wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,$interval,
     Pusher.subscribe('tag_feed', 'feed_update', function (new_media) {
 		console.log(new_media);
 		//A new images was posted -> push it to the feed!
-		$scope.feed.push(new_media);
+		$scope.feed.unshift(new_media);
     });
 
     var retrieveFeed = function () {

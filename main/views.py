@@ -65,7 +65,6 @@ class TagFeedViewSet(viewsets.ModelViewSet):
 
         return JsonResponse(images_data,safe=False)
 
-
 class InstaFeedUpdate(generics.ListCreateAPIView):
     queryset = TagFeed.objects.all()
     serializer_class = TagFeed
@@ -88,7 +87,8 @@ class InstaFeedUpdate(generics.ListCreateAPIView):
                 if not any(img['id'] == media['id'] for img in request.session['images_data']):
                     new_media = {'id':media['id'],'href':media['images']['thumbnail']['url'],'tags':media['tags']}
                     request.session['images_data'].append(new_media)
-
+                    request.session.save()
+            
                     pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
                     pusher.trigger('tag_feed', 'feed_update', new_media)
 
