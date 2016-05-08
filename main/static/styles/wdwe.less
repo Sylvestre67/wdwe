@@ -19,3 +19,17 @@ body {
   height: @footer-height;
   background-color: @gray-lighter;
 }
+
+
+.feed-images{
+
+	.flex-display();
+	.flex-direction(@direction: row);
+	.flex-wrap(@wrap: wrap);
+	.justify-content(@justify: flex-start);
+
+	& img{
+		margin-right:1em;
+	}
+
+}

@@ -7,6 +7,9 @@ from django.http import JsonResponse
 
 from rest_framework import generics
 
+import requests
+import json
+
 from rest_framework.decorators import detail_route, list_route
 
 import wdwe.settings as env
@@ -49,10 +52,19 @@ class TagFeedViewSet(viewsets.ModelViewSet):
 
     def list(self,request,**kwargs):
 
-        #pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
-        #pusher.trigger('tag_feed', 'feed_update', {'some': "data"})
+        tags = self.get_queryset()
+        images_data = []
 
-        return super(TagFeedViewSet,self).list(request,**kwargs)
+        for tag in tags:
+            for media in tag.data['data']:
+                if not any(img['id'] == media['id'] for img in images_data):
+                    new_media = {'id':media['id'],'href':media['images']['thumbnail']['url'],'tags':media['tags']}
+                    images_data.append(new_media)
+
+        request.session['images_data'] = images_data
+
+        return JsonResponse(images_data,safe=False)
+
 
 class InstaFeedUpdate(generics.ListCreateAPIView):
     queryset = TagFeed.objects.all()
@@ -65,13 +77,19 @@ class InstaFeedUpdate(generics.ListCreateAPIView):
         tag_endpoint_param = {}
         tag_endpoint_param['access_token'] = insta_user.extra_data['access_token']
 
-        #update tag infomation
-        url = "https://api.instagram.com/v1/tags/%s" % tag
-        tag_req = requests.get(url, params=tag_endpoint_param)
-        tag_object.tag_data = json.loads(tag_req.content)
+        tags = self.get_queryset()
 
-        #pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
-        #pusher.trigger('tag_feed', 'feed_update', {'some': "data"})
+        for tag in tags:
+            #THIS IS A LOT OF INSTAGRAM API CALL -> TODO: IMPROVE!
+            print('Instagram_API_Call')
+            updated_tag = tag.update_tag_data(tag_endpoint_param)
+
+            for media in updated_tag.data['data']:
+                if not any(img['id'] == media['id'] for img in request.session['images_data']):
+                    new_media = {'id':media['id'],'href':media['images']['thumbnail']['url'],'tags':media['tags']}
+                    request.session['images_data'].append(new_media)
+
+                    pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
+                    pusher.trigger('tag_feed', 'feed_update', new_media)
 
         return JsonResponse({'success':'Check out your new view feed.'})
-

@@ -1,33 +1,25 @@
 var wdweControllers = angular.module('wdweApp.controllers', []);
 
-wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,Pusher,TagFeed) {
+wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,$interval,Pusher,TagFeed) {
 
-	$scope.message = 'Hello Angular !';
+	$scope.message = 'Bon Appetit!';
 	$scope.feed = [];
     $scope.items = [];
 
-    Pusher.subscribe('tag_feed', 'feed_update', function (item) {
-
-		console.log(item);
-		$scope.items = item;
-
-        // an item was updated. find it in our list and update it.
-        /*for (var i = 0; i < $scope.items.length; i++) {
-            if ($scope.items[i].id === item.id) {
-                $scope.items[i] = item;
-                break;
-            }
-        }*/
+    Pusher.subscribe('tag_feed', 'feed_update', function (new_media) {
+		console.log(new_media);
+		//A new images was posted -> push it to the feed!
+		$scope.feed.push(new_media);
     });
 
-    var retrieveItems = function () {
+    var retrieveFeed = function () {
         console.log('getting feed');
         TagFeed.query(function (response) {
 		    $scope.feed = response;
 	    });
     };
 
-    $scope.updateItem = function () {
+    var updateItem = function () {
         console.log('updating item');
         $http({
 			method: 'GET',
@@ -43,7 +35,9 @@ wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,Pusher,Tag
 		});
     };
 
+	$interval(updateItem, 15000);
+
     // load the items
-    retrieveItems();
+    retrieveFeed();
 
 });

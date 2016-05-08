@@ -10,4 +10,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class TagFeedSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TagFeed
-        fields = ('url', 'name', 'data')
+        fields = ('name', 'data')
