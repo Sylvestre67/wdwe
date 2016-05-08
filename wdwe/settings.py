@@ -150,3 +150,12 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+#####################
+#
+# PUSHER CONFIG
+#
+#####################
+PUSHER_APP_KEY = "141eb0d4f2f16a645679"
+PUSHER_APP_ID = "203968"
+PUSHER_APP_SECRET = "fd1bc9ed4e63add9521f"

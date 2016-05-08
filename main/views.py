@@ -1,10 +1,12 @@
 from django.views.generic import FormView,TemplateView,ListView,DetailView,View,CreateView,UpdateView
 from django.contrib.auth.models import User,Group
+import wdwe.settings as env
 
 from rest_framework import viewsets
 
 from models import *
 from serializers import *
+from pusher import Pusher
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -35,6 +37,14 @@ class TagFeedViewSet(viewsets.ModelViewSet):
     """
     queryset = TagFeed.objects.all()
     serializer_class = TagFeedSerializer
+
+    def list(self,request,**kwargs):
+        import pdb;pdb.set_trace()
+
+        pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
+        pusher.trigger('a_channel', 'an_event', {'some': "data"})
+
+        return super(TagFeedViewSet,self).list(request,**kwargs)
 
     def update(self,*args,**kwargs):
         tag_feed = ''
