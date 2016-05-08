@@ -12,6 +12,10 @@ router.register(r'tag_feed', TagFeedViewSet)
 urlpatterns = [
     url(r'^api/', include(router.urls)),
 
+     url(r'^api/insta_feed_update/$',
+        InstaFeedUpdate.as_view(),
+        name='insta_feed_update'),
+
     url(r'^$',
         IndexView.as_view(),
         name='home')

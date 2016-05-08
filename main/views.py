@@ -1,5 +1,14 @@
 from django.views.generic import FormView,TemplateView,ListView,DetailView,View,CreateView,UpdateView
 from django.contrib.auth.models import User,Group
+
+from social.apps.django_app.default.models import UserSocialAuth
+
+from django.http import JsonResponse
+
+from rest_framework import generics
+
+from rest_framework.decorators import detail_route, list_route
+
 import wdwe.settings as env
 
 from rest_framework import viewsets
@@ -39,19 +48,30 @@ class TagFeedViewSet(viewsets.ModelViewSet):
     serializer_class = TagFeedSerializer
 
     def list(self,request,**kwargs):
-        import pdb;pdb.set_trace()
 
-        pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
-        pusher.trigger('a_channel', 'an_event', {'some': "data"})
+        #pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
+        #pusher.trigger('tag_feed', 'feed_update', {'some': "data"})
 
         return super(TagFeedViewSet,self).list(request,**kwargs)
 
-    def update(self,*args,**kwargs):
-        tag_feed = ''
-        user = ''
+class InstaFeedUpdate(generics.ListCreateAPIView):
+    queryset = TagFeed.objects.all()
+    serializer_class = TagFeed
 
-        #UPDATE THE TAG_FEED BY MAKING INSTAGRAM API CALL
+    def list(self,request,**kwargs):
 
-        #TRIGGER A PUSHER EVENT TO NOTIFY THE FEED OF THIS TAG HAS BEEN UPDATED
+        insta_user = UserSocialAuth.objects.get(user = request.user)
 
-        pass
+        tag_endpoint_param = {}
+        tag_endpoint_param['access_token'] = insta_user.extra_data['access_token']
+
+        #update tag infomation
+        url = "https://api.instagram.com/v1/tags/%s" % tag
+        tag_req = requests.get(url, params=tag_endpoint_param)
+        tag_object.tag_data = json.loads(tag_req.content)
+
+        #pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
+        #pusher.trigger('tag_feed', 'feed_update', {'some': "data"})
+
+        return JsonResponse({'success':'Check out your new view feed.'})
+

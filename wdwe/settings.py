@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'wdwe.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wdwe',
+        'NAME': 'wdwe_dev',
         'USER': 'postgres',
         'PASSWORD': 'noosfere',
         'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 

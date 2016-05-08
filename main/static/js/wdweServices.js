@@ -8,5 +8,5 @@ angular.module('wdweApp.services', ['ngResource'])
 			{
 				'update' : {method:'PATCH'}
 			}
-		);
-  	});
+		)
+	});
