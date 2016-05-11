@@ -88,7 +88,7 @@ class InstaFeedUpdate(generics.ListCreateAPIView):
                     new_media = {'id':media['id'],'href':media['images']['thumbnail']['url'],'tags':media['tags']}
                     request.session['images_data'].append(new_media)
                     request.session.save()
-            
+
                     pusher = Pusher(env.PUSHER_APP_ID, env.PUSHER_APP_KEY, env.PUSHER_APP_SECRET)
                     pusher.trigger('tag_feed', 'feed_update', new_media)
 

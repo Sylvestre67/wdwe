@@ -2,17 +2,53 @@
 
 {% block main %}
 
+
+	{% if not user.is_anonymous %}
+
 	<div class="container">
-		<p><a ui-sref="home">Home</a></p>
+		<div class="row">
+			<div class="col-xs-12">
+				<nav class="nav-bar">
+					<div>
+						<div class="nav-item"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></div>
+					</div>
+					<div>
+						<div class="nav-item"><a ui-sref="home"><i class="fa fa-user"></i> {{ user.get_full_name }}</a></div>
+						<div class="nav-item"><a ui-sref="home"> Contact Us</a></div>
+					</div>
+				</nav>
+			</div>
+		</div>
 
-		<p>Hello World!</p>
-
-		<p><a href="{% url 'social:begin' 'instagram' %}?scope=public_content">Login - Instagram</a></p>
-        <p><a href="{% url 'auth_logout' %}">Logout</a></p>
-		<p>Looged in as {{ request.user.get_full_name }}</p>
-
-		<div ui-view></div>
-
+		<div class="row">
+			<div class="col-xs-12">
+				<div ui-view></div>
+			<!--<p><a href="{% url 'auth_logout' %}">Logout</a></p>
+			<p>Looged in as {{ request.user }}</p>-->
+			</div>
+		</div>
 	</div>
+
+	{% else %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-offset-4 col-sm-4">
+				<h1>&nbsp</h1>
+				<div class="login-instagram">
+					<a href="{% url 'social:begin' 'instagram' %}?scope=public_content">
+						<i class="fa fa-instagram"></i>
+						Login
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% endif %}
+
+
+
+	<!--<p><a ui-sref="home">Home</a></p>-->
 
 {% endblock %}
