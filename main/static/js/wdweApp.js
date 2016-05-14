@@ -4,6 +4,7 @@ angular.module('wdweApp', [
 	'ngCookies',
 	'wdweApp.controllers',
 	'wdweApp.services',
+	'wdweApp.directives',
 	'doowb.angular-pusher'
 ])
 	.config(function ($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $urlRouterProvider) {

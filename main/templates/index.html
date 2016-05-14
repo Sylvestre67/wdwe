@@ -10,11 +10,13 @@
 			<div class="col-xs-12">
 				<nav class="nav-bar">
 					<div>
-						<div class="nav-item"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></div>
+						<!--<div class="nav-item"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></div>-->
 					</div>
 					<div>
-						<div class="nav-item"><a ui-sref="home"><i class="fa fa-user"></i> {{ user.get_full_name }}</a></div>
-						<div class="nav-item"><a ui-sref="home"> Contact Us</a></div>
+						<div class="nav-item">
+							<a ui-sref="home"><i class="fa fa-user"></i> {{ user.get_full_name }}</a>
+						</div>
+						<div class="nav-item"><a href="{% url 'auth_logout' %}"> Log Out</a></div>
 					</div>
 				</nav>
 			</div>

@@ -16,7 +16,12 @@ urlpatterns = [
         InstaFeedUpdate.as_view(),
         name='insta_feed_update'),
 
+    url(r'^api/insta_feed_update/(?P<post_id>\w+)/$',
+        InstaPostInfo.as_view(),
+        name='insta_post_information'),
+
     url(r'^$',
         IndexView.as_view(),
         name='home')
+
 ]

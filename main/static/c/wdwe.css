@@ -41,6 +41,7 @@ a:focus {
 }
 .feed-images img {
   margin-right: 1em;
+  cursor: pointer;
 }
 .login-instagram {
   font-size: 1.5em;

@@ -3,6 +3,9 @@
  */
 
 angular.module('wdweApp.services', ['ngResource'])
+	.factory('TagInformation',function($resource){
+		return $resource('/api/tag_information/:id/')
+	})
 	.factory('TagFeed', function($resource) {
 		return $resource('/api/tag_feed/:id/',null,
 			{

@@ -40,15 +40,15 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset            = User.objects.all()
+    serializer_class    = UserSerializer
 
 class TagFeedViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows proposal campaign to be viewed or edited.
+    API endpoint that allows the images from a tag to be viewed.
     """
-    queryset = TagFeed.objects.all()
-    serializer_class = TagFeedSerializer
+    queryset            = TagFeed.objects.all()
+    serializer_class    = TagFeedSerializer
 
     def list(self,request,**kwargs):
 
@@ -66,8 +66,8 @@ class TagFeedViewSet(viewsets.ModelViewSet):
         return JsonResponse(images_data,safe=False)
 
 class InstaFeedUpdate(generics.ListCreateAPIView):
-    queryset = TagFeed.objects.all()
-    serializer_class = TagFeed
+    queryset            = TagFeed.objects.all()
+    serializer_class    = TagFeed
 
     def list(self,request,**kwargs):
 
@@ -93,3 +93,35 @@ class InstaFeedUpdate(generics.ListCreateAPIView):
                     pusher.trigger('tag_feed', 'feed_update', new_media)
 
         return JsonResponse({'success':'Check out your new view feed.'})
+
+class InstaPostInfo(View):
+
+    def get(self,*args,**kwargs):
+        """
+        Makes an API call to instagram API and return the information about the media and the location, if media has one.
+        :param args:
+        :param kwargs:
+        :return:
+        """
+
+        insta_user = UserSocialAuth.objects.get(user = self.request.user)
+        tag_endpoint_param = {}
+        tag_endpoint_param['access_token'] = insta_user.extra_data['access_token']
+
+        #Get media information
+        url = "https://api.instagram.com/v1/media/%s" % self.kwargs['post_id']
+        media_req = requests.get(url, params=tag_endpoint_param)
+        media_data = json.loads(media_req.content)
+
+        import pdb;pdb.set_trace()
+        if media_data['data']['location']:
+            #make API call to retrieve Location Information
+            pass
+
+
+
+
+
+
+        return JsonResponse({'success':media_data})
+

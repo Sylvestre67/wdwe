@@ -4,16 +4,14 @@ wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,$interval,
 
 	$scope.message = 'Bon Appetit!';
 	$scope.feed = [];
-    $scope.items = [];
+	$scope.instapost = {'init': 'init'};
 
     Pusher.subscribe('tag_feed', 'feed_update', function (new_media) {
-		console.log(new_media);
 		//A new images was posted -> push it to the feed!
 		$scope.feed.unshift(new_media);
     });
 
     var retrieveFeed = function () {
-        console.log('getting feed');
         TagFeed.query(function (response) {
 		    $scope.feed = response;
 	    });
@@ -25,8 +23,8 @@ wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,$interval,
 			method: 'GET',
 			url: '/api/insta_feed_update/'
 		}).then(function successCallback(response) {
-				// this callback will be called asynchronously
-				// when the response is available
+			// this callback will be called asynchronously
+			// when the response is available
 			console.log(response);
 		}, function errorCallback(response) {
 			// called asynchronously if an error occurs
@@ -35,7 +33,12 @@ wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,$interval,
 		});
     };
 
-	$interval(updateItem, 15000);
+	 $scope.updateInstaPost = function(media){
+		 $scope.instapost = media;
+		 //console.log($scope.instapost);
+	};
+
+	//$interval(updateItem, 15000);
 
     // load the items
     retrieveFeed();

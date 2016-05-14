@@ -1,3 +1,18 @@
-<div class="feed-images" ng-cloak>
-	<img ng-repeat="media in feed" src="[[ media.href ]]" />
-<div>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-2">
+		<p>What's for dinner NYC ?</p>
+		<insta-post-details dataset="instapost"></insta-post-details>
+	</div>
+</div>
+
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<hr>
+		<div class="feed-images" ng-cloak>
+			<img ng-repeat="media in feed" src="[[ media.href ]]" ng-click="updateInstaPost(media)" />
+		<div>
+	</div>
+</div>
+

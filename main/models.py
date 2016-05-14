@@ -12,6 +12,7 @@ class TagFeed(models.Model):
         tag_endpoint_param['COUNT'] = 20
         url = "https://api.instagram.com/v1/tags/%s/media/recent" % self.name
         tag_req = requests.get(url, params=tag_endpoint_param)
+
         self.data = json.loads(tag_req.content)
         self.save()
 
