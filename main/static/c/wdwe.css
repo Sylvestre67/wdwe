@@ -20,6 +20,29 @@ a:focus {
   height: 60px;
   background-color: #eeeeee;
 }
+.insta-caption {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  justify-content: flex-start;
+}
+.insta-caption img {
+  max-width: 50px;
+  max-height: 50px;
+}
 .feed-images {
   display: -webkit-flex;
   display: -moz-flex;
@@ -42,6 +65,21 @@ a:focus {
 .feed-images img {
   margin-right: 1em;
   cursor: pointer;
+}
+.lookup.btn {
+  border-radius: 0;
+}
+.lookup.yelp {
+  color: white;
+  background-color: #c41200;
+}
+.lookup.opentable {
+  color: white;
+  background-color: #da3743;
+}
+.lookup.seamless {
+  color: white;
+  background-color: #c90117;
 }
 .login-instagram {
   font-size: 1.5em;

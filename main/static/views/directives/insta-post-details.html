@@ -1,2 +1,29 @@
-<p>Hello Directives!</p>
-<p>Instapost: [[ instapost ]]</p>
+<div class="row">
+	<div class="col-xs-4">
+		<img class="img-responsive" src="[[ insta_post_info.data.data.images.low_resolution.url ]]" />
+	</div>
+
+	<div class="col-xs-8">
+		<p>Where: [[ insta_post_info.data.data.location.name ]]</p>
+		<div class="insta-caption">
+			<img class="img-circle" src="[[ insta_post_info.data.data.caption.from.profile_picture ]]">
+			<p class="small">[[ insta_post_info.data.data.caption.text ]]</p>
+		</div>
+		<p>
+			<i class="fa fa-thumbs-up" aria-hidden="true"></i> [[ insta_post_info.data.data.likes.count ]]
+		</p>
+		<p>Lookup this place on: </p>
+		<div class="btn yelp lookup">
+			Yelp
+		</div>
+
+		<div class="btn opentable lookup">
+			OpenTable
+		</div>
+
+		<div class="btn seamless lookup">
+			Seamless
+		</div>
+
+	</div>
+</div>

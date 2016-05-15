@@ -99,11 +99,7 @@ class InstaPostInfo(View):
     def get(self,*args,**kwargs):
         """
         Makes an API call to instagram API and return the information about the media and the location, if media has one.
-        :param args:
-        :param kwargs:
-        :return:
         """
-
         insta_user = UserSocialAuth.objects.get(user = self.request.user)
         tag_endpoint_param = {}
         tag_endpoint_param['access_token'] = insta_user.extra_data['access_token']
@@ -113,15 +109,13 @@ class InstaPostInfo(View):
         media_req = requests.get(url, params=tag_endpoint_param)
         media_data = json.loads(media_req.content)
 
-        import pdb;pdb.set_trace()
         if media_data['data']['location']:
             #make API call to retrieve Location Information
-            pass
+            url = "https://api.instagram.com/v1/locations/%s/media/recent" % media_data['data']['location']['id']
+            location_req = requests.get(url, params=tag_endpoint_param)
+            location_data = json.loads(location_req.content)
+            #add location_data to media_data
+            media_data['location_info'] = location_data
 
-
-
-
-
-
-        return JsonResponse({'success':media_data})
+        return JsonResponse({'data': media_data})
 

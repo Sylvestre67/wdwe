@@ -24,6 +24,10 @@
 @yahoo: #7B0099;
 @blogger: #fb8f3d;
 @soundcloud: #ff3a00;
+@yelp: #c41200;
+@opentable:#da3743;
+@seamless:#c90117;
+
 
 html {
   position: relative;
@@ -52,6 +56,18 @@ a{
   background-color: @gray-lighter;
 }
 
+.insta-caption{
+	.flex-display();
+	.flex-direction(@direction: row);
+	.flex-wrap(@wrap: nowrap);
+	.justify-content(@justify: flex-start);
+
+	& img{
+		max-width: 50px;
+    	max-height: 50px;
+	}
+
+}
 
 .feed-images{
 	.flex-display();
@@ -62,6 +78,29 @@ a{
 	& img{
 		margin-right:1em;
 		cursor:pointer;
+	}
+
+}
+
+.lookup{
+	//padding:1em;
+	&.btn{
+		border-radius: 0;
+	}
+
+	&.yelp{
+		color:white;
+		background-color:@yelp;
+	}
+
+	&.opentable{
+		color:white;
+		background-color:@opentable;
+	}
+
+	&.seamless{
+		color:white;
+		background-color:@seamless;
 	}
 
 }

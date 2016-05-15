@@ -3,17 +3,26 @@
  */
 var wdweDirectives = angular.module('wdweApp.directives', []);
 
-wdweDirectives.directive('instaPostDetails', function() {
+wdweDirectives.directive('instaPostDetails', ['InstaPost', function(InstaPost) {
   return {
 	  restrict: 'E',
 	  templateUrl: 'static/views/directives/insta-post-details.html',
 	  scope: {
 		  instapost: '=dataset',
 	  },
-	  /*link: function(scope,element,attrs){
+	  link: function(scope,element,attrs){
 
-		  console.log(scope.instapost);
+		  scope.insta_post_info = {};
 
-	  }*/
+		  scope.$watch('instapost', function(newValue,oldValue){
+			  newValue.id ?
+				  InstaPost.get({postId:newValue.id},function(post_data){
+					  scope.insta_post_info = post_data;
+				  })
+				  : scope.insta_post_info = {status : 'no_data'};
+		  })
+
+	  }
   };
-});
+}]
+);

@@ -3,8 +3,8 @@
  */
 
 angular.module('wdweApp.services', ['ngResource'])
-	.factory('TagInformation',function($resource){
-		return $resource('/api/tag_information/:id/')
+	.factory('InstaPost',function($resource){
+		return $resource('/api/insta_post_information/:postId/')
 	})
 	.factory('TagFeed', function($resource) {
 		return $resource('/api/tag_feed/:id/',null,
