@@ -71,7 +71,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wdwe.wsgi.application'
 
+DATABASES = {}
+
 if os.getenv('DATABASE_URL'):
+
     # Update database configuration with $DATABASE_URL.
     import dj_database_url
     db_from_env = dj_database_url.config(conn_max_age=500)
@@ -81,6 +84,30 @@ if os.getenv('DATABASE_URL'):
     # https://warehouse.python.org/project/whitenoise/
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
+    ALLOWED_HOSTS = ['*']
+
+    ##############################
+    #
+    # YELP API CREDENTIALS
+    #
+    #############################
+    YELP_CONSUMER_KEY       = os.getenv('YELP_CONSUMER_KEY')
+    YELP_CONSUMER_SECRET    = os.getenv('YELP_CONSUMER_SECRET')
+    YELP_TOKEN              = os.getenv('YELP_TOKEN')
+    YELP_TOKEN_SECRET       = os.getenv('YELP_TOKEN_SECRET')
+
+    #############################
+    #
+    # PUSHER CONFIG
+    #
+    #############################
+
+    PUSHER_APP_KEY      =  os.getenv('PUSHER_APP_KEY')
+    PUSHER_APP_ID       =  os.getenv('PUSHER_APP_KEY')
+    PUSHER_APP_SECRET   =  os.getenv('PUSHER_APP_SECRET')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
