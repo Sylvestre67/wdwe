@@ -71,7 +71,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wdwe.wsgi.application'
 
-DATABASES = {}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
 
 if os.getenv('DATABASE_URL'):
 
