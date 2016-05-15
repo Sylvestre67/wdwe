@@ -56,6 +56,8 @@ class TagFeedViewSet(viewsets.ModelViewSet):
         tags = self.get_queryset()
         images_data = []
 
+        #TODO: Need to set_up the initial API call to retrieve the post from tag at first load.
+
         for tag in tags:
             for media in tag.data['data']:
                 if not any(img['id'] == media['id'] for img in images_data):
