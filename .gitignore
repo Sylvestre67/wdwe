@@ -59,4 +59,5 @@ docs/_build/
 target/
 
 .idea
+local_settings.py
 # Created by .ignore support plugin (hsz.mobi)

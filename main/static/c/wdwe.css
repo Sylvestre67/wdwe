@@ -68,18 +68,21 @@ a:focus {
 }
 .lookup.btn {
   border-radius: 0;
+  height: 50px;
+  width: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 25px;
 }
 .lookup.yelp {
   color: white;
-  background-color: #c41200;
+  background-image: url("../images/yelp-logo.png");
 }
 .lookup.opentable {
   color: white;
-  background-color: #da3743;
-}
-.lookup.seamless {
-  color: white;
-  background-color: #c90117;
+  width: 140px;
+  background-image: url("../images/opentable-logo.png");
 }
 .login-instagram {
   font-size: 1.5em;

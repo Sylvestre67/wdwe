@@ -18,13 +18,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'elzxaibkce36d!ym1#076(v371@1&4g(r$0=fm3=j*w%arjixu'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -77,19 +72,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wdwe.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wdwe_dev',
-        'USER': 'postgres',
-        'PASSWORD': 'noosfere',
-        'HOST': '127.0.0.1',
-        'PORT': '5433',
-    }
-}
 
 
 # Password validation
@@ -152,11 +134,8 @@ REST_FRAMEWORK = {
     ]
 }
 
-#####################
-#
-# PUSHER CONFIG
-#
-#####################
-PUSHER_APP_KEY = "141eb0d4f2f16a645679"
-PUSHER_APP_ID = "203968"
-PUSHER_APP_SECRET = "fd1bc9ed4e63add9521f"
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
