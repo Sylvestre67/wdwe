@@ -71,18 +71,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wdwe.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
-}
+
 
 if os.getenv('DATABASE_URL'):
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USERNAME'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOSTNAME'),
+            'PORT': os.getenv('DB_PORT'),
+        }
+    }
 
     # Update database configuration with $DATABASE_URL.
     import dj_database_url
