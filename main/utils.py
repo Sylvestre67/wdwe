@@ -62,7 +62,7 @@ def update_yp_op_information(location_id):
     except Exception as e:
         print(e)
 
-    return location
+    return {'status':'Successfully update media location'}
 
 def send_pusher_event(media):
 

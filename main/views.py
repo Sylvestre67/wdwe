@@ -137,8 +137,6 @@ class InstaFeedUpdate(generics.ListCreateAPIView):
                         #START UPDATE/CREATE TASK TO COLLECT LOCATION INFORMATION and send the pusher event when done.
                         task_update_yp_op_information.apply_async((media_location.pk,),link=task_send_pusher_event.si(media,))
 
-                       #task_update_yp_op_information.apply_async(media_location.pk,link=task_send_pusher_event(media))
-
                 request.session.save()
 
         return JsonResponse({'success':'Check out your new view feed.'})
