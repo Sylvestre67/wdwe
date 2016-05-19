@@ -1,6 +1,8 @@
 <div class="row">
 	<div class="col-xs-11 col-xs-offset-1">
 		<p>What's for dinner NYC ?</p>
+
+		<p>[[feed[5].location]]</p>
 		<insta-post-details dataset="instapost"></insta-post-details>
 	</div>
 </div>
@@ -11,7 +13,7 @@
 	<div class="col-xs-12">
 		<hr>
 		<div class="feed-images" ng-cloak>
-			<img ng-repeat="media in feed" src="[[ media.href ]]" ng-click="updateInstaPost(media)" />
+			<img ng-repeat="media in feed" src="[[ media.images.thumbnail.url ]]" ng-click="updateInstaPost(media)" />
 		<div>
 	</div>
 </div>

@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -34,6 +33,7 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'django_extensions',
     'rest_framework',
+    'djcelery',
 
     'main'
 ]
@@ -119,6 +119,16 @@ if os.getenv('DATABASE_URL'):
     PUSHER_APP_ID       =  os.getenv('PUSHER_APP_KEY')
     PUSHER_APP_SECRET   =  os.getenv('PUSHER_APP_SECRET')
 
+    #############################
+    #
+    # INSTAGRAM CONFIG
+    #
+    #############################
+
+    SOCIAL_AUTH_INSTAGRAM_KEY    = os.getenv('SOCIAL_AUTH_INSTAGRAM_KEY')
+    SOCIAL_AUTH_INSTAGRAM_SECRET = os.getenv('SOCIAL_AUTH_INSTAGRAM_SECRET')
+SOCIAL_AUTH_INSTAGRAM_AUTH_EXTRA_ARGUMENTS = {'scope': 'public_content likes comments relationships follower_list'}
+
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -175,10 +185,6 @@ SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
 LOGIN_REDIRECT_URL = '/'
 
-SOCIAL_AUTH_INSTAGRAM_KEY    = 'b81edb486a994bd3a5ab2d3ae811d962'
-SOCIAL_AUTH_INSTAGRAM_SECRET = 'cd93ca4495004189b26c0b888fa564b9'
-SOCIAL_AUTH_INSTAGRAM_AUTH_EXTRA_ARGUMENTS = {'scope': 'public_content likes comments relationships follower_list'}
-
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -187,6 +193,20 @@ REST_FRAMEWORK = {
     ]
 }
 
+
+
+# CELERY STUFF
+if os.environ['REDIS_URL']:
+    BROKER_URL                  = os.getenv('REDIS_URL')
+    CELERY_RESULT_BACKEND       = os.getenv('REDIS_URL')
+else:
+    BROKER_URL                  = 'redis://localhost:6379'
+    CELERY_RESULT_BACKEND       = 'djcelery.backends.database:DatabaseBackend'
+
+CELERY_ACCEPT_CONTENT       = ['application/json']
+CELERY_TASK_SERIALIZER      = 'json'
+CELERY_RESULT_SERIALIZER    = 'json'
+CELERY_TIMEZONE             = 'Africa/Nairobi'
 
 try:
     from local_settings import *

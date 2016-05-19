@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User,Group
-from models import *
+from main.models import TagFeed
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

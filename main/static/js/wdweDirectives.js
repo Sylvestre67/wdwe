@@ -18,6 +18,7 @@ wdweDirectives.directive('instaPostDetails', ['InstaPost', function(InstaPost) {
 			  newValue.id ?
 				  InstaPost.get({postId:newValue.id},function(post_data){
 					  scope.insta_post_info = post_data;
+					  console.log(scope.insta_post_info);
 				  })
 				  : scope.insta_post_info = {status : 'no_data'};
 		  })

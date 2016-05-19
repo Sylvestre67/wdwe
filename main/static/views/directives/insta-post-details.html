@@ -1,16 +1,17 @@
 <div class="row">
+
 	<div class="col-xs-4">
-		<img class="img-responsive" src="[[ insta_post_info.data.data.images.low_resolution.url ]]" />
+		<img class="img-responsive" src="[[ insta_post_info.data.images.low_resolution.url ]]" />
 	</div>
 
 	<div class="col-xs-8">
-		<p>Where: [[ insta_post_info.data.data.location.name ]]</p>
+		<p>Where: [[ insta_post_info.data.location.name ]]</p>
 		<div class="insta-caption">
-			<img class="img-circle" src="[[ insta_post_info.data.data.caption.from.profile_picture ]]">
-			<p class="small">[[ insta_post_info.data.data.caption.text ]]</p>
+			<img class="img-circle" src="[[ insta_post_info.data.caption.from.profile_picture ]]">
+			<p class="small">[[ insta_post_info.data.caption.text ]]</p>
 		</div>
 		<p>
-			<i class="fa fa-thumbs-up" aria-hidden="true"></i> [[ insta_post_info.data.data.likes.count ]]
+			<i class="fa fa-thumbs-up" aria-hidden="true"></i> [[ insta_post_info.data.likes.count ]]
 		</p>
 		<p>Lookup this place on: </p>
 		<div class="btn yelp lookup">
@@ -20,8 +21,17 @@
 			&nbsp
 		</div>
 
-		<p>OpenTable: [[ insta_post_info.data.opentable_info ]]</p>
-		<p>Yelp: [[ insta_post_info.data.yelp_info ]]</p>
+		<p>OpenTable: <a href="[[ insta_post_info.data.location.open_table.restaurants[0].reserve_url ]]">Reserve</a></p>
+		<p>Yelp: </p>
+		<img src="[[insta_post_info.data.location.yp_table.places_info.snippet_img_url]]" />
+		<img src="[[insta_post_info.data.location.yp_table.places_info.rating_img_url]]" />
+		<p>Review count: [[insta_post_info.data.location.yp_table.places_info.review_count]]</p>
+		<p>[[insta_post_info.data.location.yp_table.places_info.review_count]]</p>
+
+		<p><p>[[insta_post_info.data.location.yp_table.places_info.snippet_text]]</p>
+
+
+			<!--[[ insta_post_info.data.location.yp_table ]]</p>-->
 
 	</div>
 </div>

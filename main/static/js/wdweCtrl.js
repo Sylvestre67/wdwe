@@ -15,9 +15,21 @@ wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,$interval,
     var retrieveFeed = function () {
         TagFeed.query(function (response) {
 		    $scope.feed = response;
+			console.log($scope.feed);
 			$scope.instapost = response[0];
 	    });
     };
+
+	//Select randomly on of the picture on the feed.
+	var randomPost = function(){
+		var index = Math.floor(Math.random() * ( $scope.feed.length - 0) + 0);
+
+		console.log($scope.feed[index]);
+
+		$scope.instapost = $scope.feed[index];
+
+		return $scope.feed[index];
+	};
 
     var updateItem = function () {
         console.log('updating item');
@@ -39,7 +51,9 @@ wdweControllers.controller('HomeCtrl', function HomeCtrl($scope,$http,$interval,
 		 $scope.instapost = media;
 	};
 
-	//$interval(updateItem, 15000);
+	$interval(updateItem, 15000);
+
+	$interval(randomPost,5000);
 
     // load the items
     retrieveFeed();
