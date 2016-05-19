@@ -196,7 +196,7 @@ REST_FRAMEWORK = {
 
 
 # CELERY STUFF
-if os.environ['REDIS_URL']:
+if os.getenv('REDIS_URL'):
     BROKER_URL                  = os.getenv('REDIS_URL')
     CELERY_RESULT_BACKEND       = os.getenv('REDIS_URL')
 else:
